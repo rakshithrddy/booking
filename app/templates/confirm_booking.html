@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div class="jumbotron">
+        <h3>Trip Type: {{ booking_details.trip_type }}</h3>
+        <h3> Depart From: {{ booking_details.depart_from }}</h3>
+        <h3>Depart To: {{ booking_details.depart_to }}</h3>
+        <h3>Departure Date: {{ booking_details.departure_date }}</h3>
+        <h3>Pickup Address: {{ booking_details.pickup_address }}</h3>
+        <h3>Pickup Time: {{ booking_details.pickup_time }}</h3>
+        <h3>Driver Name: {{ booking_details.driver_name }}</h3>
+        <h3>Cost Per KM: Rs {{ booking_details.cost_per_km }}</h3>
+        <h3>Car Name: {{ booking_details.car_name }}</h3>
+        <h3>Total Distance: {{ booking_details.total_distance }}</h3>
+        <h3>Total Cost: Rs {{ booking_details.total_cost }}</h3>
+        <div class="jumbotron">
+                <a href="#" id="buy_now_btn" class="btn btn-primary">Book Now</a>
+        </div>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="{{ url_for('static', filename='script-ajax.js') }}"></script>
+    </div>
+{% endblock %}

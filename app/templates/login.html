@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <h1>{{ 'Sign In' }}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="{{ url_for('login') }}" method="post">
+                 {{ form.hidden_tag() }}
+                <p>{{ form.username.label}}
+                    {{ form.username}}
+                </p>
+                <p>{{ form.phone_number.label }}
+                    {{ form.phone_number }}
+                </p>
+                <p>{{ form.email.label }}
+                    {{ form.email }}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+    <br>
+    <p>{{ 'New User?' }} <a href="{{ url_for('register') }}">{{ 'Click to Register!'}}</a></p>
+{% endblock %}

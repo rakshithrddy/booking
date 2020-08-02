@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="jumbotron">
+    <h2>Trip Details</h2><br>
+    <form action="{{ url_for( 'index' ) }}" method="POST">
+        {{ form.hidden_tag() }}
+        <p> {{ form.trip_type }}
+            <label for="depart_from">Depart From: </label>
+            <select id="depart_from" name = "depart_from">
+                    <option value="Bengaluru">Bengaluru</option>
+            </select>
+            <label for="depart_to">Depart To: </label>
+            <select id="depart_to" name = "depart_to">
+                {% for loc in locations %}
+                    <option value="{{ loc }}">{{ loc }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>{{ form.departure_date.label}}
+            {{ form.departure_date(type='date')}}
+            {% for error in form.departure_date.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<div class="jumbotron">
+    <h3> Select Driver</h3>
+    <form action="{{ url_for( 'select_driver' ) }}" method="POST">
+        {{ form.hidden_tag() }}
+        <p>
+            <label for="language_id">language</label>
+            <select id="language_id" name="language">
+                {% for lang in languages %}
+                <option value="{{ lang }}"> {{ lang }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label for="drivername_id">Driver Name</label>
+            <select id="drivername_id" name="drivername">
+            </select>
+        </p>
+        <p>
+            {{ form.car_name.label}}
+            {{ form.car_name}}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#language_id').on('change', function (event) {
+            $.ajax({
+                url: '/maps',
+                type: 'POST',
+                data: $('data__'),
+            })
+                //this is done when the response is received
+                .done(function (data) {
+                    myFunction(data)
+                });
+            event.preventDefault();
+        });
+    });
+    function myFunction(data) {
+        let price;
+        const language_to_driver_map = data['language_to_driver_map'];
+        const driver_to_cost_map = data['driver_to_cost_map'];
+        const x = document.getElementById("language_id").value;
+        const y = document.getElementById('drivername_id');
+        console.log(x);
+        const drivers = language_to_driver_map[x];
+
+        const length = y.options.length;
+        for (let i = length - 1; i >= 0; i--) {
+            y.options[i] = null;
+        }
+        for (let i = 0; i < drivers.length; i++) {
+            const opt = document.createElement('option');
+            price = driver_to_cost_map[drivers[i]];
+            opt.value = drivers[i];
+            opt.innerHTML = drivers[i] + ' price:' + price + 'Rs/KM';
+            y.appendChild(opt);
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+FROM python:3.6-alpine
+
+RUN apk add --no-cache python3-dev
+RUN apk add --no-cache py-pip
+
+WORKDIR /home/bookingblog
+
+COPY . /home/bookingblog
+
+RUN apk add --no-cache libc-dev
+RUN apk update
+RUN apk add make automake gcc g++ subversion python3-dev
+RUN pip --no-cache-dir install -U pip
+
+RUN pip3 --no-cache-dir install -r requirements.txt
+RUN pip3 --no-cache-dir install gunicorn pymysql
+
+EXPOSE 5000
+
+ENTRYPOINT ["python3"]
+CMD ["booking.py"]
