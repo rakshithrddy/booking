@@ -1,11 +1,9 @@
+from datetime import datetime
+
 from flask_login import UserMixin
 
-from app import db, engine
+from app import db
 from app import login
-from datetime import datetime
-from sqlalchemy.orm import sessionmaker
-
-session_orm = sessionmaker(bind=engine)
 
 
 class User(UserMixin, db.Model):

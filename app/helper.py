@@ -21,7 +21,7 @@ def get_city_coordinates():
 def get_distance(source, destination, trip_type='One Way', operational_optimize=True) -> int:
     """
     takes in source city name and destination name to calculate distance.
-    :return: distance in kms (float)
+    :return: distance in kms (int)
     """
     data, _ = get_city_coordinates()
     source_city_lat, source_city_long = data.loc[source]

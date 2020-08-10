@@ -147,6 +147,7 @@ def login():
             return redirect(url_for('login'))
         login_user(user_)
         try:
+            # request.args.get()
             next_page = request.referrer.split('next=%2F')[1]
             if next_page:
                 return redirect(url_for(next_page))
